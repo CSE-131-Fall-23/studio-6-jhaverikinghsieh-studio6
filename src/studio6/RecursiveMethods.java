@@ -14,7 +14,17 @@ public class RecursiveMethods {
 	public static double geometricSum(int n) {
 		
 			// FIXME compute the geometric sum for the first n terms recursively
+		double sum = 0.0;
+		if (n == 0)
+		{
 			return 0;
+		}
+		else 
+		{
+			sum = sum + Math.pow(0.5, n);
+			return sum + geometricSum(n-1);
+		}
+		
 		
 	}
 
@@ -44,10 +54,28 @@ public class RecursiveMethods {
 	public static int[] toReversed(int[] array) {
 		
 			// FIXME create a helper method that can recursively reverse the given array
-			return new int[0];
+		if (array.length == 0)
+		{
+			return array;
+		}
+		else if (array.length == 1)
+		{
+			return array;
+		}
+		else
+			return helperReversed(array, array.length-1);
 		
 	}
-
+	public static int[] helperReversed(int[] array, int n) {
+		if (n > array.length/2)
+		{
+			
+		}
+		else
+		{
+			
+		}
+	}
 	/**
 	 * @param xCenter                       x-coordinate of the center of the circle
 	 *                                      at the current depth
@@ -59,8 +87,22 @@ public class RecursiveMethods {
 	 */
 	public static void circlesUponCircles(double xCenter, double yCenter, double radius,
 			double radiusMinimumDrawingThreshold) {
-		
-		// FIXME
+		double radius2 = radius;
+		if (radius2 == radiusMinimumDrawingThreshold)
+		{
+			StdDraw.circle(xCenter+radius2, yCenter, radius2/3);
+			StdDraw.circle(xCenter-radius2, yCenter, radius2/3);
+			StdDraw.circle(xCenter, yCenter+radius2, radius2/3);
+			StdDraw.circle(xCenter, yCenter-radius2, radius2/3);
+		}
+		else if (radius2 > radiusMinimumDrawingThreshold)
+		{
+			StdDraw.circle(xCenter, yCenter, radius2);
+			circlesUponCircles(xCenter+radius2, yCenter, radius2/3, radiusMinimumDrawingThreshold);
+			circlesUponCircles(xCenter-radius2, yCenter, radius2/3, radiusMinimumDrawingThreshold);
+			circlesUponCircles(xCenter, yCenter+radius2, radius2/3, radiusMinimumDrawingThreshold);
+			circlesUponCircles(xCenter, yCenter-radius2, radius2/3, radiusMinimumDrawingThreshold);
+		}
 	}
 
 }
